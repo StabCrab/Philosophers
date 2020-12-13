@@ -15,11 +15,11 @@ int main()
     philosophers[3] = new Philosopher("Popper",3, &forks[2], &forks[3], &cout_mutex);
     philosophers[4] = new Philosopher("Aristotel",4, &forks[3], &forks[4], &cout_mutex);
     std::vector<thread> threads;
-    threads.push_back(thread([&philosophers]() { philosophers[0]->philosophize();}));
-    threads.push_back(thread([&philosophers]() { philosophers[1]->philosophize();}));
-    threads.push_back(thread([&philosophers]() { philosophers[2]->philosophize();}));
-    threads.push_back(thread([&philosophers]() { philosophers[3]->philosophize();}));
-    threads.push_back(thread([&philosophers]() { philosophers[4]->philosophize();}));
+    threads.push_back(thread(&Philosopher::philosophize, philosophers[0]));
+    threads.push_back(thread(&Philosopher::philosophize, philosophers[1]));
+    threads.push_back(thread(&Philosopher::philosophize, philosophers[2]));
+    threads.push_back(thread(&Philosopher::philosophize, philosophers[3]));
+    threads.push_back(thread(&Philosopher::philosophize, philosophers[4]));
 
 
     for(auto &t : threads)
